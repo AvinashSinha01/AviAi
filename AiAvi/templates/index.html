@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EstateAI — Smart Property Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <div class="logo-icon">⬡</div>
+        <span>EstateAI</span>
+      </div>
+      <div class="nav-links">
+        <a href="#predict-section">Predict</a>
+        <a href="#chat-section">Assistant</a>
+        <a href="#features-section">Features</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="orb orb1"></div>
+      <div class="orb orb2"></div>
+      <div class="orb orb3"></div>
+      <div class="grid-overlay"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-dot"></span>
+        AI-Powered · Real-time · India Market
+      </div>
+      <h1 class="hero-title">
+        Know Your Property's<br>
+        <span class="gradient-text">True Value</span>
+      </h1>
+      <p class="hero-sub">
+        Advanced ML model trained on real Indian housing data.<br>
+        Get instant price predictions + talk to your AI real estate expert.
+      </p>
+      <div class="hero-actions">
+        <a href="#predict-section" class="btn-primary">Predict Price →</a>
+        <a href="#chat-section" class="btn-ghost">Chat with AI</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">98%</span><span class="stat-label">Accuracy</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">10K+</span><span class="stat-label">Properties Analysed</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num">AI</span><span class="stat-label">Powered Chat</span></div>
+      </div>
+    </div>
+    <div class="hero-card-float">
+      <div class="float-card">
+        <div class="float-card-top">
+          <span class="float-label">Live Estimate</span>
+          <span class="float-badge">ML Model</span>
+        </div>
+        <div class="float-price">₹84,50,000</div>
+        <div class="float-meta">3 BHK · 1400 sqft · Pune</div>
+        <div class="float-bar"><div class="float-bar-fill"></div></div>
+        <div class="float-footer">
+          <span>Market confidence</span><span class="conf-pct">92%</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features-section" id="features-section">
+    <div class="section-inner">
+      <div class="section-label">What EstateAI Does</div>
+      <h2 class="section-title">Everything you need<br>to make smarter decisions</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🧠</div>
+          <h3>ML Price Prediction</h3>
+          <p>Our model analyses area, bedrooms, bathrooms and parking to give you an accurate market-aligned estimate.</p>
+        </div>
+        <div class="feature-card feature-card--highlight">
+          <div class="feature-icon">🤖</div>
+          <h3>AI Real Estate Chat</h3>
+          <p>Ask anything — average prices by city, buying tips, investment advice. Powered by Groq LLaMA 3.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Market Intelligence</h3>
+          <p>Get context-aware insights about Indian real estate trends, city comparisons, and locality analysis.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="predict-section" id="predict-section">
+    <div class="section-inner">
+      <div class="section-label">Price Estimator</div>
+      <h2 class="section-title">Get your instant<br>property valuation</h2>
+      <div class="predict-layout">
+        <div class="predict-form-card">
+          <div class="form-header">
+            <span class="form-step">Step 1</span>
+            <span class="form-step-label">Enter property details</span>
+          </div>
+          <div class="input-group">
+            <label>Total Area</label>
+            <div class="input-wrap">
+              <input type="number" id="area" placeholder="e.g. 1200">
+              <span class="input-unit">sq ft</span>
+            </div>
+          </div>
+          <div class="input-row">
+            <div class="input-group">
+              <label>Bedrooms</label>
+              <div class="counter-wrap">
+                <button class="counter-btn" onclick="change('bedrooms',-1)">−</button>
+                <input type="number" id="bedrooms" value="2" min="1" max="10">
+                <button class="counter-btn" onclick="change('bedrooms',1)">+</button>
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Bathrooms</label>
+              <div class="counter-wrap">
+                <button class="counter-btn" onclick="change('bathrooms',-1)">−</button>
+                <input type="number" id="bathrooms" value="1" min="1" max="10">
+                <button class="counter-btn" onclick="change('bathrooms',1)">+</button>
+              </div>
+            </div>
+            <div class="input-group">
+              <label>Parking</label>
+              <div class="counter-wrap">
+                <button class="counter-btn" onclick="change('parking',-1)">−</button>
+                <input type="number" id="parking" value="1" min="0" max="5">
+                <button class="counter-btn" onclick="change('parking',1)">+</button>
+              </div>
+            </div>
+          </div>
+          <button class="predict-btn" onclick="predict()">
+            <span id="predict-btn-text">Calculate Price</span>
+            <span id="predict-loader" class="btn-loader hidden"></span>
+          </button>
+        </div>
+        <div class="result-card" id="result-card">
+          <div class="result-empty" id="result-empty">
+            <div class="result-empty-icon">🏠</div>
+            <p>Your estimate will appear here</p>
+          </div>
+          <div class="result-filled hidden" id="result-filled">
+            <div class="result-label">Estimated Market Value</div>
+            <div class="result-price" id="result-price">—</div>
+            <div class="result-divider"></div>
+            <div class="result-meta-grid">
+              <div class="result-meta-item">
+                <span class="meta-label">Area</span>
+                <span class="meta-val" id="r-area">—</span>
+              </div>
+              <div class="result-meta-item">
+                <span class="meta-label">Bedrooms</span>
+                <span class="meta-val" id="r-bed">—</span>
+              </div>
+              <div class="result-meta-item">
+                <span class="meta-label">Bathrooms</span>
+                <span class="meta-val" id="r-bath">—</span>
+              </div>
+              <div class="result-meta-item">
+                <span class="meta-label">Parking</span>
+                <span class="meta-val" id="r-park">—</span>
+              </div>
+            </div>
+            <button class="ask-ai-btn" onclick="askAIAboutResult()">Ask AI about this estimate →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="chat-section" id="chat-section">
+    <div class="section-inner">
+      <div class="section-label">AI Assistant</div>
+      <h2 class="section-title">Your personal<br>real estate expert</h2>
+      <div class="chat-container">
+        <div class="chat-header">
+          <div class="chat-avatar">
+            <div class="avatar-ring"></div>
+            <span>AI</span>
+          </div>
+          <div class="chat-header-info">
+            <div class="chat-name">EstateAI Assistant</div>
+            <div class="chat-status"><span class="status-dot"></span>Online · Powered by LLaMA 3</div>
+          </div>
+          <button class="clear-btn" onclick="clearChat()">Clear</button>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+          <div class="msg msg--bot">
+            <div class="msg-avatar">AI</div>
+            <div class="msg-bubble">
+              👋 Hello! I'm your AI real estate assistant. Ask me anything about property prices, buying tips, investment advice, or specific cities in India!
+            </div>
+          </div>
+        </div>
+        <div class="chat-suggestions" id="chat-suggestions">
+          <button class="suggestion-chip" onclick="sendSuggestion(this)">Average price in Mumbai?</button>
+          <button class="suggestion-chip" onclick="sendSuggestion(this)">Best areas to invest in Pune?</button>
+          <button class="suggestion-chip" onclick="sendSuggestion(this)">Tips for first-time buyers</button>
+        </div>
+        <div class="chat-input-bar">
+          <input type="text" id="chat-input" placeholder="Ask about property prices, areas, tips..." />
+          <button class="send-btn" onclick="sendChat()" id="send-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">⬡ EstateAI</div>
+      <p>AI-powered real estate intelligence for the Indian market.</p>
+      <p class="footer-note">Built with Flask · Scikit-learn · Groq LLaMA 3</p>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
